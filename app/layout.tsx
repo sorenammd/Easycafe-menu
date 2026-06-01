@@ -3,6 +3,12 @@ import { Manrope } from "next/font/google";
 import "swiper/css";
 import "./globals.css";
 
+const metadataBase = new URL(
+  process.env.NEXT_PUBLIC_SITE_URL?.startsWith("http")
+    ? process.env.NEXT_PUBLIC_SITE_URL
+    : "http://localhost:3000"
+);
+
 const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
@@ -10,8 +16,30 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
+  metadataBase,
   title: "Easycafe | منوی کافه رستوران ایزی",
   description: "منوی دیجیتال کافه رستوران ایزی با تم مشکی و نارنجی.",
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
+  openGraph: {
+    title: "Easycafe | منوی کافه رستوران ایزی",
+    description: "منوی دیجیتال کافه رستوران ایزی با تم مشکی و نارنجی.",
+    images: [
+      {
+        url: "/banner.png",
+        alt: "بنر منوی کافه رستوران ایزی",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Easycafe | منوی کافه رستوران ایزی",
+    description: "منوی دیجیتال کافه رستوران ایزی با تم مشکی و نارنجی.",
+    images: ["/banner.png"],
+  },
 };
 
 export default function RootLayout({
