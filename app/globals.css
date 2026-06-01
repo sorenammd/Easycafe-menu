@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050505;
+  --foreground: #fff4e8;
+  --surface: #101010;
+  --surface-soft: #181818;
+  --accent: #ff8c21;
+  --accent-strong: #ff6a00;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-soft: var(--surface-soft);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-manrope);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at top, rgba(255, 140, 33, 0.2) 0%, transparent 30%),
+    radial-gradient(circle at 82% 10%, rgba(255, 106, 0, 0.15) 0%, transparent 24%),
+    linear-gradient(180deg, #030303 0%, #080808 46%, #101010 100%);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 140, 33, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 140, 33, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at center, black 22%, transparent 92%);
+  opacity: 0.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
