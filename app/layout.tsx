@@ -11,16 +11,16 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Easycafe | منوی کافه رستوران ایزی",
-  description: "منوی دیجیتال کافه رستوران ایزی با تم مشکی و نارنجی.",
+  title: "Easycafe | کافه رستوران ایزی، طعم خوش قهوه و لحظه های خوب",
+  description: "ایزی کافه جایی برای قهوه های باکیفیت، غذاهای خوش طعم و قرارهای صمیمی در فضایی گرم و متفاوت است.",
   icons: {
     icon: "/logo.png",
     shortcut: "/logo.png",
     apple: "/logo.png",
   },
   openGraph: {
-    title: "Easycafe | منوی کافه رستوران ایزی",
-    description: "منوی دیجیتال کافه رستوران ایزی با تم مشکی و نارنجی.",
+    title: "Easycafe | کافه رستوران ایزی، طعم خوش قهوه و لحظه های خوب",
+    description: "ایزی کافه جایی برای قهوه های باکیفیت، غذاهای خوش طعم و قرارهای صمیمی در فضایی گرم و متفاوت است.",
     images: [
       {
         url: "/banner.png",
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Easycafe | منوی کافه رستوران ایزی",
-    description: "منوی دیجیتال کافه رستوران ایزی با تم مشکی و نارنجی.",
+    title: "Easycafe | کافه رستوران ایزی، طعم خوش قهوه و لحظه های خوب",
+    description: "ایزی کافه جایی برای قهوه های باکیفیت، غذاهای خوش طعم و قرارهای صمیمی در فضایی گرم و متفاوت است.",
     images: ["/banner.png"],
   },
 };
