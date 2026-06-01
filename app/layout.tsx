@@ -3,11 +3,6 @@ import { Manrope } from "next/font/google";
 import "swiper/css";
 import "./globals.css";
 
-const metadataBase = new URL(
-  process.env.NEXT_PUBLIC_SITE_URL?.startsWith("http")
-    ? process.env.NEXT_PUBLIC_SITE_URL
-    : "http://localhost:3000"
-);
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -16,7 +11,6 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  metadataBase,
   title: "Easycafe | منوی کافه رستوران ایزی",
   description: "منوی دیجیتال کافه رستوران ایزی با تم مشکی و نارنجی.",
   icons: {
