@@ -50,9 +50,8 @@ export default function ConnectPage() {
                                 {brand.name}
                             </p>
                             <h1 className="mt-1 text-[1.55rem] font-extrabold tracking-tighter text-white">
-                                صفحه کانکت
+                                ارتباط باما
                             </h1>
-                            <p className="mt-2 text-sm text-white/54">اطلاعات تماس و آدرس کافه</p>
                         </div>
                     </header>
 
@@ -68,11 +67,8 @@ export default function ConnectPage() {
                         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.34)_0%,rgba(0,0,0,0.68)_100%)]" />
                         <div className="absolute inset-x-0 bottom-0 p-5">
                             <p className="text-[0.72rem] font-semibold tracking-[0.3em] text-orange-200/82">
-                                EASYCAFE SANANDAJ
+                                EASYCAFE
                             </p>
-                            <h2 className="mt-2 max-w-[14ch] text-[1.85rem] font-bold leading-tight text-white">
-                                تماس، آدرس و راه‌های ارتباط با برند
-                            </h2>
                         </div>
                     </div>
 
