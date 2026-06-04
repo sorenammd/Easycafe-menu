@@ -20,7 +20,7 @@ const SECTION_LOGOS: Record<SectionId, string> = {
   "iced-coffee": "/category/ice-coffee.png",
   "hot-drinks": "/category/hot-drink.png",
   shakes: "/category/milkshake.png",
-  smoothies: "/category/milkshake.png",
+  smoothies: "/category/smoothie.png",
   mocktails: "/category/ice-coffee.png",
 };
 
@@ -58,11 +58,14 @@ export default function Categories() {
                   loading={index === 0 ? "eager" : undefined}
                   className="object-scale-down"
                   style={{
-                    transform: "scale(1.8)",
+                    transform:
+                      section.id === "smoothies"
+                        ? "translateY(-10px) scale(2.05)"
+                        : "scale(1.8)",
                   }}
                 />
               </span>
-              <span style={{ whiteSpace: "nowrap" }} className="mt-3.5 min-h-9 text-[0.75rem]  font-bold leading-4 tracking-[-0.03em] text-white/92">
+              <span style={{ whiteSpace: "nowrap" }} className="mt-5 text-[0.75rem]  font-bold leading-4 tracking-[-0.03em] text-white/92">
                 {section.title}
               </span>
             </a>
