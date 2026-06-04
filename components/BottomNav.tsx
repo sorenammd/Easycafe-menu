@@ -77,7 +77,7 @@ function AnchorLink({ item, itemHash, rawHashPart, isActive, setHash }: any) {
     if (typeof window !== "undefined") {
       try {
         setHash(window.location.hash);
-      } catch (_) {}
+      } catch (_) { }
       const el = rawHashPart ? document.getElementById(rawHashPart) : null;
       if (el) el.scrollIntoView({ behavior: "smooth" });
     }
@@ -91,10 +91,10 @@ function AnchorLink({ item, itemHash, rawHashPart, isActive, setHash }: any) {
       if (window.location.pathname === targetPath && window.location.hash) {
         try {
           window.history.replaceState(null, "", targetPath);
-        } catch {}
+        } catch { }
         try {
           setHash("");
-        } catch {}
+        } catch { }
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;
       }
@@ -104,7 +104,7 @@ function AnchorLink({ item, itemHash, rawHashPart, isActive, setHash }: any) {
     if (typeof window !== "undefined") {
       try {
         setHash(window.location.hash);
-      } catch {}
+      } catch { }
     }
   };
 
@@ -116,7 +116,7 @@ function AnchorLink({ item, itemHash, rawHashPart, isActive, setHash }: any) {
       className={`flex min-w-[68px] flex-col items-center gap-1.5 rounded-full px-3 py-2 text-center transition-colors ${isActive
         ? "bg-orange-500 text-white shadow-[0_12px_24px_rgba(255,106,0,0.3)]"
         : "text-white/72 hover:text-white"
-      }`}
+        }`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
