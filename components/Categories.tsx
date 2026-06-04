@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { menuSections } from "./easycafe-data";
 
@@ -25,11 +26,41 @@ const SECTION_LOGOS: Record<SectionId, string> = {
 };
 
 export default function Categories() {
-  return (
-    <section
-      id="categories"
-      className="sticky top-3 z-30 mt-1 rounded-[30px] overflow-hidden bg-[linear-gradient(180deg,rgba(12,12,12,0.9),rgba(8,8,8,0.82))] px-3 py-3 shadow-[0_22px_44px_rgba(0,0,0,0.22)] backdrop-blur-xl"
-    >
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [isFixed, setIsFixed] = useState(false);
+  const [placeholderHeight, setPlaceholderHeight] = useState(0);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const updateHeight = () => {
+      const rect = el.getBoundingClientRect();
+      setPlaceholderHeight(rect.height);
+    };
+    updateHeight();
+    const ro = new ResizeObserver(updateHeight);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [isFixed]);
+
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsFixed(!entry.isIntersecting);
+        });
+      },
+      { threshold: 0 }
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, []);
+
+  const sectionInner = (
+    <>
       <div className="flex items-center px-1">
         <h3 className="text-[0.78rem] font-semibold tracking-[0.22em] text-orange-100/74">
           دسته‌بندی منو
@@ -72,6 +103,66 @@ export default function Categories() {
           </SwiperSlide>
         ))}
       </Swiper>
-    </section>
+    </>
+  );
+
+  const compactInner = (
+    <Swiper
+      dir="rtl"
+      slidesPerView="auto"
+      spaceBetween={15}
+      grabCursor
+      className="hide-scrollbar py-1"
+    >
+      {menuSections.map((section, index) => (
+        <SwiperSlide key={section.id} className="min-w-25! max-w-fit">
+          <a
+            href={`#${section.id}`}
+            className="inline-flex items-center gap-2 rounded-[20px] px-3 py-1 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))] text-white/92 border border-white/6 shadow-sm"
+          >
+            <div className="relative flex-none w-9 h-9 rounded-full bg-black/30 border border-white/8 flex items-center justify-center">
+              <Image
+                src={SECTION_LOGOS[section.id]}
+                alt={`لوگوی دسته ${section.title}`}
+                width={28}
+                height={28}
+                loading={index === 0 ? "eager" : undefined}
+                className="object-contain"
+              />
+            </div>
+            <span className="whitespace-nowrap text-[0.78rem] font-semibold leading-4">
+              {section.title}
+            </span>
+          </a>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  );
+
+  return (
+    <div className="relative">
+      <div ref={sentinelRef} className="h-0" />
+      <div style={{ height: isFixed ? placeholderHeight : 0 }} aria-hidden />
+
+      {isFixed ? (
+        <div className="fixed left-0 right-0 top-0 z-50 px-3">
+          <section
+            ref={(el) => { sectionRef.current = el; }}
+            id="categories"
+            className="mt-0 max-w-110 mx-auto rounded-[30px] overflow-hidden bg-[linear-gradient(180deg,rgba(12,12,12,0.9),rgba(8,8,8,0.82))] px-3 py-2 shadow-[0_22px_44px_rgba(0,0,0,0.22)] backdrop-blur-xl"
+          >
+            {compactInner}
+          </section>
+        </div>
+      ) : (
+        <section
+          ref={(el) => { sectionRef.current = el; }}
+          id="categories"
+          className="sticky top-3 z-30 mt-1 rounded-[30px] overflow-hidden bg-[linear-gradient(180deg,rgba(12,12,12,0.9),rgba(8,8,8,0.82))] px-3 py-3 shadow-[0_22px_44px_rgba(0,0,0,0.22)] backdrop-blur-xl"
+        >
+          {sectionInner}
+        </section>
+      )}
+    </div>
   );
 }

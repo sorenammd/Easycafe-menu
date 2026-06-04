@@ -170,13 +170,11 @@ export default function BottomNav() {
           const rawHashPart = item.href.includes("#") ? item.href.split("#").pop() : null;
           const itemHash = rawHashPart ? `#${rawHashPart}` : null;
 
-          const currentHref = typeof window !== "undefined"
-            ? window.location.pathname + (window.location.hash || "")
-            : pathname + (hash || "");
-
           const isActive = item.href.includes("#")
-            ? currentHref.startsWith(item.route) && itemHash && currentHref.includes(itemHash)
-            : currentHref === item.href;
+            ? pathname === item.route && itemHash === hash
+            : item.href === "/"
+              ? pathname === "/" && !hash
+              : pathname === item.href;
 
           return (
             <AnchorLink
