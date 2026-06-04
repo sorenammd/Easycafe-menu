@@ -62,25 +62,35 @@ function AnchorLink({ item, itemHash, rawHashPart, isActive, setHash }: any) {
     if (!itemHash) return;
     e.preventDefault();
     const targetPath = item.route ?? "/";
-    const target = `${targetPath}${itemHash}`;
+    if (typeof window === "undefined") return;
 
-    if (typeof window !== "undefined") {
-      if (window.location.pathname === targetPath && window.location.hash === itemHash) {
+    if (window.location.pathname === targetPath) {
+      // Same path: just set the hash (or scroll if already set)
+      if (window.location.hash === itemHash) {
         const el = rawHashPart ? document.getElementById(rawHashPart) : null;
         if (el) el.scrollIntoView({ behavior: "smooth" });
         return;
       }
-    }
 
-    await router.push(target);
-
-    if (typeof window !== "undefined") {
+      try {
+        window.location.hash = rawHashPart || itemHash || "";
+      } catch (_) { }
       try {
         setHash(window.location.hash);
       } catch (_) { }
       const el = rawHashPart ? document.getElementById(rawHashPart) : null;
       if (el) el.scrollIntoView({ behavior: "smooth" });
+      return;
     }
+
+    // Different path: navigate to full path+hash so browser URL includes hash immediately
+    const fullTarget = `${targetPath}${itemHash || ""}`;
+    await router.push(fullTarget);
+    try {
+      setHash(typeof window !== "undefined" ? window.location.hash : "");
+    } catch (_) { }
+    const el = rawHashPart ? document.getElementById(rawHashPart) : null;
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   const homeClick = async (e: any) => {
@@ -159,10 +169,14 @@ export default function BottomNav() {
         {NAV_ITEMS.map((item) => {
           const rawHashPart = item.href.includes("#") ? item.href.split("#").pop() : null;
           const itemHash = rawHashPart ? `#${rawHashPart}` : null;
-          const currentHash = typeof window !== "undefined" ? window.location.hash : hash;
-          const isActive = itemHash
-            ? pathname === item.route && (currentHash === itemHash || (currentHash && currentHash.endsWith(itemHash)))
-            : pathname === item.route && !currentHash;
+
+          const currentHref = typeof window !== "undefined"
+            ? window.location.pathname + (window.location.hash || "")
+            : pathname + (hash || "");
+
+          const isActive = item.href.includes("#")
+            ? currentHref.startsWith(item.route) && itemHash && currentHref.includes(itemHash)
+            : currentHref === item.href;
 
           return (
             <AnchorLink
