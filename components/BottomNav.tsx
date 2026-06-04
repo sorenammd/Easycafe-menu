@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
   {
@@ -29,14 +30,14 @@ const NAV_ITEMS = [
     ),
   },
   {
-    href: "/#menu",
-    label: "آیتم‌ها",
-    route: "/",
+    href: "/events",
+    label: "ایونت‌ها",
+    route: "/events",
     icon: (
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="M7 5h10M7 12h10M7 19h10M4 5h.01M4 12h.01M4 19h.01"
+        d="M8 7V3M16 7V3M3 11h18M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"
       />
     ),
   },
@@ -54,8 +55,100 @@ const NAV_ITEMS = [
   },
 ] as const;
 
+function AnchorLink({ item, itemHash, rawHashPart, isActive, setHash }: any) {
+  const router = useRouter();
+
+  const handleClick = async (e: any) => {
+    if (!itemHash) return;
+    e.preventDefault();
+    const targetPath = item.route ?? "/";
+    const target = `${targetPath}${itemHash}`;
+
+    if (typeof window !== "undefined") {
+      if (window.location.pathname === targetPath && window.location.hash === itemHash) {
+        const el = rawHashPart ? document.getElementById(rawHashPart) : null;
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+    }
+
+    await router.push(target);
+
+    if (typeof window !== "undefined") {
+      try {
+        setHash(window.location.hash);
+      } catch (_) {}
+      const el = rawHashPart ? document.getElementById(rawHashPart) : null;
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const homeClick = async (e: any) => {
+    e.preventDefault();
+    const targetPath = item.route ?? "/";
+
+    if (typeof window !== "undefined") {
+      if (window.location.pathname === targetPath && window.location.hash) {
+        try {
+          window.history.replaceState(null, "", targetPath);
+        } catch {}
+        try {
+          setHash("");
+        } catch {}
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+    }
+
+    await router.push(targetPath);
+    if (typeof window !== "undefined") {
+      try {
+        setHash(window.location.hash);
+      } catch {}
+    }
+  };
+
+  return (
+    <Link
+      href={item.href}
+      aria-label={item.label}
+      onClick={item.href.includes("#") ? handleClick : item.href === "/" ? homeClick : undefined}
+      className={`flex min-w-[68px] flex-col items-center gap-1.5 rounded-full px-3 py-2 text-center transition-colors ${isActive
+        ? "bg-orange-500 text-white shadow-[0_12px_24px_rgba(255,106,0,0.3)]"
+        : "text-white/72 hover:text-white"
+      }`}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={1.8}
+      >
+        {item.icon}
+      </svg>
+      <span className="text-[0.68rem] font-semibold">{item.label}</span>
+    </Link>
+  );
+}
+
 export default function BottomNav() {
   const pathname = usePathname();
+  const [hash, setHash] = useState(
+    typeof window !== "undefined" ? window.location.hash : ""
+  );
+
+  useEffect(() => {
+    const onHashChange = () => setHash(window.location.hash);
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  // Keep hash state in sync after client-side navigation (router.push)
+  useEffect(() => {
+    if (typeof window !== "undefined") setHash(window.location.hash);
+  }, [pathname]);
 
   return (
     <nav
@@ -63,30 +156,26 @@ export default function BottomNav() {
       className="fixed bottom-4 left-1/2 z-30 w-[calc(100%-2rem)] max-w-[408px] -translate-x-1/2"
     >
       <div className="mx-auto flex items-center justify-between rounded-full border border-orange-500/18 bg-black/80 px-3 py-3 shadow-[0_24px_48px_rgba(0,0,0,0.4)] ring-1 ring-white/6 backdrop-blur-md">
-        {NAV_ITEMS.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            aria-label={item.label}
-            className={`flex min-w-[68px] flex-col items-center gap-1.5 rounded-full px-3 py-2 text-center transition-colors ${pathname === item.route
-              && pathname === item.href
-              ? "bg-orange-500 text-white shadow-[0_12px_24px_rgba(255,106,0,0.3)]"
-              : "text-white/72 hover:text-white"
-              }`}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={1.8}
-            >
-              {item.icon}
-            </svg>
-            <span className="text-[0.68rem] font-semibold">{item.label}</span>
-          </Link>
-        ))}
+        {NAV_ITEMS.map((item) => {
+          const rawHashPart = item.href.includes("#") ? item.href.split("#").pop() : null;
+          const itemHash = rawHashPart ? `#${rawHashPart}` : null;
+          const currentHash = typeof window !== "undefined" ? window.location.hash : hash;
+          const isActive = itemHash
+            ? pathname === item.route && (currentHash === itemHash || (currentHash && currentHash.endsWith(itemHash)))
+            : pathname === item.route && !currentHash;
+
+          return (
+            <AnchorLink
+              key={item.href}
+              item={item}
+              itemHash={itemHash}
+              rawHashPart={rawHashPart}
+              isActive={isActive}
+              setHash={setHash}
+            />
+          );
+        })}
+
       </div>
     </nav>
   );

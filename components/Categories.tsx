@@ -65,7 +65,7 @@ export default function Categories() {
                   }}
                 />
               </span>
-              <span style={{ whiteSpace: "nowrap" }} className="mt-5 text-[0.75rem]  font-bold leading-4 tracking-[-0.03em] text-white/92">
+              <span style={{ whiteSpace: "nowrap" }} className="mt-5 min-h-6 flex items-center justify-center text-[0.75rem]  font-bold leading-4 tracking-[-0.03em] text-white/92">
                 {section.title}
               </span>
             </a>
