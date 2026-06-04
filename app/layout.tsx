@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Vazirmatn } from "next/font/google";
 import "swiper/css";
 import "./globals.css";
 
-
-const manrope = Manrope({
-  variable: "--font-manrope",
-  subsets: ["latin"],
+const vazirmatn = Vazirmatn({
+  variable: "--font-vazirmatn",
+  subsets: ["arabic"],
   display: "swap",
 });
 
@@ -42,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fa" dir="rtl" className={`${manrope.variable} h-full antialiased`}>
+    <html lang="fa" dir="rtl" className={`${vazirmatn.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}
       </body>
