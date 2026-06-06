@@ -1,15 +1,39 @@
 import BottomNav from "@/components/BottomNav";
-import { brand } from "@/components/easycafe-data";
 import Image from "next/image";
 
 export default function EventsPage() {
     const events = [
         {
+            id: "playtime",
+            title: "پلی‌تایم",
+            blurb: "پلی‌تایم — دورهمیِ بازی‌های تخته‌ای با هیجانِ رقابت و کلی خنده؛ مناسب برای گروه‌های دوستانه. صندلی‌ها محدود‌اند",
+            date: "جمعه",
+            time: "۱۸:۰۰",
+            image: "/events/board-game.png",
+        },
+        {
             id: "mafia",
-            title: "مافیا",
-            blurb: "بازی اجتماعی و مهیج در فضای کافه",
-            date: "به‌زودی",
-            howTo: "به‌زودی",
+            title: "ایزی مافیا",
+            blurb: "مافیا — شبِ هیجان، رمز و دورهمی؛ تجربه‌ای فراموش‌نشدنی. صندلی‌ها محدود",
+            date: "چهارشنبه",
+            time: "۱۹:۰۰ - ۰۱:۰۰",
+            image: "/events/mafia.png",
+        },
+        {
+            id: "movie-night",
+            title: "مووی نایت ایزی",
+            blurb: "مووی نایت ایزی — تجربه‌ی سینمایی در کافه با انتخاب‌های ویژه و پاپ‌کورن گرم؛ اتمسفر صمیمی و دوستانه. صندلی‌ها محدود است",
+            date: "دوشنبه",
+            time: "۲۲:۰۰",
+            image: "/events/cinema.jpeg",
+        },
+        {
+            id: "live-music",
+            title: "شب‌های جمعه — موسیقی زنده",
+            blurb: "شب‌های جمعه موسیقی زنده در کافه؛ فضای گرم و اجرای زنده.",
+            date: "جمعه",
+            time: "۲۱:۰۰",
+            image: "/events/live-music.png",
         },
     ];
 
@@ -40,23 +64,33 @@ export default function EventsPage() {
 
                     <div className="grid gap-4">
                         {events.map((ev) => (
-                            <article key={ev.id} className="rounded-[18px] border border-white/8 bg-[#0f0f0f] p-4 shadow-[0_18px_36px_rgba(0,0,0,0.24)]">
-                                <div className="flex items-start justify-between gap-3">
+                            <article key={ev.id} className="rounded-[18px] border border-white/8 bg-[#0f0f0f] shadow-[0_18px_36px_rgba(0,0,0,0.24)] overflow-hidden flex items-stretch min-h-[200px]">
+                                <div className="relative w-38 flex-shrink-0 h-full">
+                                    <Image src={ev.image} alt={ev.title} fill className="object-cover" />
+                                </div>
+                                <div className="p-4 flex-1 flex flex-col justify-between">
                                     <div>
                                         <h3 className="text-lg font-bold text-white">{ev.title}</h3>
                                         <p className="mt-1 text-sm text-white/60">{ev.blurb}</p>
                                     </div>
-                                    <div className="min-w-[64px] text-right">
+                                    <div className="text-right">
                                         <p className="text-sm font-semibold text-orange-300/90">{ev.date}</p>
-                                        <p className="mt-1 text-xs text-white/54">محل: {brand.name}</p>
+                                        <p className="mt-1 text-xs text-white/54">{ev.time}</p>
                                     </div>
-                                </div>
-                                <div className="mt-4 flex items-center justify-between gap-3">
-                                    <p className="text-sm text-white/70">روش شرکت: <span className="font-semibold text-white">{ev.howTo}</span></p>
-                                    <button disabled className="rounded-md bg-orange-500/12 px-3 py-2 text-sm font-semibold text-orange-300/84 ring-1 ring-white/6">اطلاعات بیشتر</button>
                                 </div>
                             </article>
                         ))}
+
+                        {/* کارت جداگانه اطلاعات بیشتر */}
+                        <article className="rounded-[18px] border border-white/8 bg-[#0f0f0f] p-4 shadow-[0_18px_36px_rgba(0,0,0,0.24)]">
+                            <div className="flex items-center justify-between gap-3">
+                                <div>
+                                    <h3 className="text-lg font-bold text-white">اطلاعات بیشتر</h3>
+                                    <p className="mt-1 text-sm text-white/60">برای اطلاعات بیشتر با شماره زیر تماس بگیرید</p>
+                                </div>
+                                <a href="tel:09222191864" className="rounded-md bg-orange-500 px-4 py-2 text-sm font-semibold text-white">09222191864</a>
+                            </div>
+                        </article>
                     </div>
                 </div>
 

@@ -35,7 +35,7 @@ export default function ConnectPage() {
 
                 <div className="relative flex flex-1 flex-col gap-6 pb-28">
                     <header className="flex items-center gap-3 px-1 pt-3">
-                        <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-[22px] border border-orange-500/24 bg-[#131313] shadow-[0_18px_36px_rgba(255,106,0,0.16)] ring-1 ring-white/6">
+                        <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-[15px] border border-orange-500/24 bg-[#131313] shadow-[0_18px_36px_rgba(255,106,0,0.16)] ring-1 ring-white/6">
                             <Image
                                 src="/logo.png"
                                 alt="لوگوی Easycafe"
@@ -79,32 +79,45 @@ export default function ConnectPage() {
                                 href={item.href}
                                 target={item.href.startsWith("http") ? "_blank" : undefined}
                                 rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-                                className="flex items-start justify-between gap-4 rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] px-4 py-4 shadow-[0_18px_36px_rgba(0,0,0,0.2)]"
+                                className={item.label === "آدرس" ? "flex flex-col items-start gap-4 rounded-[15px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] px-4 py-4 shadow-[0_18px_36px_rgba(0,0,0,0.2)]" : "flex items-start justify-between gap-4 rounded-[15px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] px-4 py-4 shadow-[0_18px_36px_rgba(0,0,0,0.2)]"}
                             >
                                 <div className="min-w-0 flex-1">
                                     <p className="text-[0.72rem] font-semibold tracking-[0.24em] text-orange-300/72">
                                         {item.label}
                                     </p>
-                                    <p className="mt-2 text-base font-semibold leading-7 text-white">
+
+                                    {item.label === "آدرس" && (
+                                        <div className="mt-3 overflow-hidden rounded-[14px] border border-white/6 bg-[#0b0b0b]">
+                                            <div className="h-48 w-full">
+                                                <iframe
+                                                    src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d6510.979257926093!2d46.993408!3d35.318661!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzXCsDE5JzA3LjIiTiA0NsKwNTknMzYuMyJF!5e0!3m2!1sen!2sch!4v1780727269869!5m2!1sen!2sch"
+                                                    width="100%"
+                                                    height="100%"
+                                                    style={{ border: 0 }}
+                                                    loading="lazy"
+                                                    referrerPolicy="no-referrer-when-downgrade"
+                                                    title="موقعیت جغرافیایی Easycafe"
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    <p className="mt-2 text-sm font-medium leading-7 text-white">
                                         {item.value}
                                     </p>
-                                    <p className="mt-1 text-sm leading-6 text-white/54">{item.note}</p>
+                                    <p className="mt-1 text-[10px] leading-6 text-white/54">{item.note}</p>
                                 </div>
-                                <span style={{ opacity: '0.4' }} className="grid place-content-center rounded-xl  min-h-10
-                                px-3 py-1 text-sm font-semibold
-                                 text-orange-100/88">
-                                    <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                        stroke="#f5f4f4">
-                                        <g id="SVGRepo_bgCarrier" strokeWidth="0" />
-                                        <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path d="M21 9.00001L21 3.00001M21 3.00001H15M21 3.00001L12 12M10 
-                                        3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 
-                                        6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976
-                                         21 6.11984 21 7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V14" stroke="#fffafa" stroke-width="2" strokeLinecap="round" strokeLinejoin="round"></path>
-                                        </g>
-                                    </svg>
-                                </span>
+                                {item.label !== "آدرس" && (
+                                    <span style={{ opacity: '0.4' }} className="grid place-content-center rounded-xl  min-h-10 px-3 py-1 text-sm font-semibold text-orange-100/88">
+                                        <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#f5f4f4">
+                                            <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+                                            <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path d="M21 9.00001L21 3.00001M21 3.00001H15M21 3.00001L12 12M10 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V14" stroke="#fffafa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                )}
                             </a>
                         ))}
                     </section>
