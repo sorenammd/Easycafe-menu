@@ -82,7 +82,7 @@ export default function Categories() {
             >
               <span className="relative mt-3.5 flex h-15 w-full items-center justify-center  rounded-[20px] border border-white/10 bg-black/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_12px_24px_rgba(0,0,0,0.22)]">
                 <Image
-                  src={SECTION_LOGOS[section.id]}
+                  src={`/Easycafe-menu/${SECTION_LOGOS[section.id]}`}
                   alt={`لوگوی دسته ${section.title}`}
                   fill
                   sizes="100px"
@@ -122,7 +122,7 @@ export default function Categories() {
           >
             <div className="relative flex-none w-9 h-9 rounded-full bg-black/30 border border-white/8 flex items-center justify-center">
               <Image
-                src={SECTION_LOGOS[section.id]}
+                src={`/Easycafe-menu/${SECTION_LOGOS[section.id]}`}
                 alt={`لوگوی دسته ${section.title}`}
                 width={28}
                 height={28}

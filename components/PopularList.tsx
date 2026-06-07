@@ -33,7 +33,7 @@ export default function PopularList() {
                 className="group relative aspect-square overflow-hidden rounded-[28px] border border-white/8 bg-[#121212] shadow-[0_22px_38px_rgba(0,0,0,0.2)]"
               >
                 <Image
-                  src="/thumbnail.png"
+                  src="/Easycafe-menu/thumbnail.png"
                   alt={`تصویر ${item}`}
                   fill
                   sizes="(max-width: 640px) 42vw, 180px"

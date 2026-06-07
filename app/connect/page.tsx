@@ -37,7 +37,7 @@ export default function ConnectPage() {
                     <header className="flex items-center gap-3 px-1 pt-3">
                         <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-[15px] border border-orange-500/24 bg-[#131313] shadow-[0_18px_36px_rgba(255,106,0,0.16)] ring-1 ring-white/6">
                             <Image
-                                src="/logo.png"
+                                src="/Easycafe-menu/logo.png"
                                 alt="لوگوی Easycafe"
                                 fill
                                 priority
@@ -57,7 +57,7 @@ export default function ConnectPage() {
 
                     <div className="relative aspect-[16/10] overflow-hidden rounded-[34px] border border-orange-500/20 bg-[#0d0d0d] shadow-[0_26px_60px_rgba(0,0,0,0.4)]">
                         <Image
-                            src="/banner.png"
+                            src="/Easycafe-menu/banner.png"
                             alt="بنر Easycafe"
                             fill
                             priority

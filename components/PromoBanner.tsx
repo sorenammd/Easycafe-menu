@@ -5,7 +5,7 @@ export default function PromoBanner() {
     <section id="hero" className="mt-1">
       <div className="relative aspect-[16/10] overflow-hidden rounded-[12px] border border-orange-500/20 bg-[#0d0d0d] shadow-[0_26px_60px_rgba(0,0,0,0.4)]">
         <Image
-          src="/banner.png"
+          src="/Easycafe-menu/banner.png"
           alt="بنر Easycafe"
           fill
           priority

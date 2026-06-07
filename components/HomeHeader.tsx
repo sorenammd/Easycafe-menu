@@ -7,7 +7,7 @@ export default function HomeHeader() {
       <div className="flex min-w-0 items-center gap-3">
         <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-[22px] border border-orange-500/24 bg-[#131313] shadow-[0_18px_36px_rgba(255,106,0,0.16)] ring-1 ring-white/6">
           <Image
-            src="/logo.png"
+            src="/Easycafe-menu/logo.png"
             alt="لوگوی Easycafe"
             fill
             priority

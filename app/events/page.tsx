@@ -49,7 +49,7 @@ export default function EventsPage() {
                 <div className="relative flex flex-1 flex-col gap-6 pb-28">
                     <header className="flex items-center gap-3 px-1 pt-3">
                         <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-[22px] border border-orange-500/24 bg-[#131313] shadow-[0_18px_36px_rgba(255,106,0,0.16)] ring-1 ring-white/6">
-                            <Image src="/logo.png" alt="لوگوی Easycafe" fill priority sizes="64px" className="object-cover" />
+                            <Image src="/Easycafe-menu/logo.png" alt="لوگوی Easycafe" fill priority sizes="64px" className="object-cover" />
                         </div>
                         <div className="leading-tight">
                             <p className="text-[0.72rem] font-semibold uppercase tracking-[0.35em] text-orange-300/72">
@@ -66,7 +66,7 @@ export default function EventsPage() {
                         {events.map((ev) => (
                             <article key={ev.id} className="rounded-[18px] border border-white/8 bg-[#0f0f0f] shadow-[0_18px_36px_rgba(0,0,0,0.24)] overflow-hidden flex items-stretch min-h-[200px]">
                                 <div className="relative w-38 flex-shrink-0 h-full">
-                                    <Image src={ev.image} alt={ev.title} fill className="object-cover" />
+                                    <Image src={`/Easycafe-menu/${ev.image}`} alt={ev.title} fill className="object-cover" />
                                 </div>
                                 <div className="p-4 flex-1 flex flex-col justify-between">
                                     <div>
