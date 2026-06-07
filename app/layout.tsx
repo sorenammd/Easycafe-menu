@@ -10,6 +10,7 @@ const vazirmatn = Vazirmatn({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://sorenammd.github.io/Easycafe-menu"),
   title: "Easycafe | کافه رستوران ایزی، طعم خوش قهوه و لحظه های خوب",
   description: "ایزی کافه جایی برای قهوه های باکیفیت، غذاهای خوش طعم و قرارهای صمیمی در فضایی گرم و متفاوت است.",
   icons: {
